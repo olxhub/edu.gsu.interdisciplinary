@@ -647,7 +647,7 @@ Check the disciplinary insight(s) that may help explain this symbolic element in
 <Markdown><![CDATA[
 **Your Choice(s):**
 ]]></Markdown>
-<Markdown class="whitespace-pre-wrap">{{@hs2_elem1.value.map(t =&gt; "• " + t).join("&#10;")}}</Markdown>
+<Markdown>{{toMarkdownBullets(@hs2_elem1.value)}}</Markdown>
 <Markdown><![CDATA[
 Why did you select this insight(s)? Type your answer below.
 ]]></Markdown>
@@ -675,7 +675,7 @@ Check the disciplinary insight(s) that may help explain this symbolic element in
 <Markdown><![CDATA[
 **Your Choice(s):**
 ]]></Markdown>
-<Markdown class="whitespace-pre-wrap">{{@hs2_elem2.value.map(t =&gt; "• " + t).join("&#10;")}}</Markdown>
+<Markdown>{{toMarkdownBullets(@hs2_elem2.value)}}</Markdown>
 <Markdown><![CDATA[
 Why did you select this insight(s)? Type your answer below.
 ]]></Markdown>
@@ -703,7 +703,7 @@ Check the disciplinary insight(s) that may help explain this symbolic element in
 <Markdown><![CDATA[
 **Your Choice(s):**
 ]]></Markdown>
-<Markdown class="whitespace-pre-wrap">{{@hs2_elem3.value.map(t =&gt; "• " + t).join("&#10;")}}</Markdown>
+<Markdown>{{toMarkdownBullets(@hs2_elem3.value)}}</Markdown>
 <Markdown><![CDATA[
 Why did you select this insight(s)? Type your answer below.
 ]]></Markdown>
