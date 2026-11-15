@@ -29,9 +29,11 @@ license: AGPL
        same way, e.g. <Use ref="<Part 3's top block id>" when="false" />. -->
 
   <!-- Everything the student has entered, both parts, on one printable
-       page (hs_my_work.olx). Always visible; the end of Part 2's
-       conversation brings the student here. -->
-  <Use ref="hs_my_work" />
+       page (hs_my_work.olx). The end of Part 2's chat selects it.
+       Hidden until the instructor approves the page; while hidden, that
+       final Continue does nothing, so release My work no later than
+       Part 2 (delete the when="false"). -->
+  <Use ref="hs_my_work" when="false" />
 
   <!-- Same block the consent gate shows; same state. Here so a student can
        revisit and change their answer at any time (consent.olx). -->
