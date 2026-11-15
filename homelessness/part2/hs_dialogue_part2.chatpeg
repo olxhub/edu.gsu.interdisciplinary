@@ -336,7 +336,7 @@ Lianne: You chose the following option.
 
 hs2_arrow_contat_parolin_why.readonly <- true
 
-Lianne: I agree that the connection between the Contat et al and Parolin studies should probably use a dashed arrow. The Contat et al study shows how environmental disasters can increase housing instability, displacement, and financial strain, which could increase reliance on cash assistance, emergency aid, and other support programs discussed in the Parolin study. However, neither study directly examined the other variable, so the relationship seems conceptually strong but still inferential.
+Lianne: The connection between the Contat et al and Parolin studies should probably use a dashed arrow. The Contat et al study shows how environmental disasters can increase housing instability, displacement, and financial strain, which could increase reliance on cash assistance, emergency aid, and other support programs discussed in the Parolin study. However, neither study directly examined the other variable, so the relationship seems conceptually strong but still inferential.
 
 ::hs2_map10 [display=target:hs2_main label="Our concept map"]
 
@@ -678,7 +678,7 @@ Ty: You could make inferences to the unstable labor conditions and limited econo
 Representing Structural Inequality [id=hs2_revise]
 --------------------------------------------------
 
-Lianne: You are right, Ty. According to some of the studies reviewed by Fowle (2022), Black Americans make up approximately 13% of the U.S. population but nearly 40% of the homeless population nationally. Furthermore, Black individuals are more likely to experience unsheltered homelessness and longer durations of homelessness than White individuals.
+Lianne: You are right, Ty. According to some of the studies reviewed by Fowle (2022), African Americans make up approximately 13% of the U.S. population but nearly 40% of the homeless population nationally. Furthermore, African American individuals are more likely to experience unsheltered homelessness and longer durations of homelessness than White individuals.
 
   This insight should be more strongly integrated into the movie.
 
@@ -865,7 +865,7 @@ Lianne: You chose the following option.
 
 hs2_line1_choice_why.readonly <- true
 
-Ty: I think this is the strongest option. The first line reflects the environmental risks discussed in the Contat et al study, while the second line shows how those risks can increase the need for shelter, assistance, and other supports emphasized in the Parolin study. The line communicates the relationship rather than either study by itself.
+Ty: I think the strongest option is “As waters rise and shorelines break, the need for shelter grows.” The first line reflects the environmental risks discussed in the Contat et al study, while the second line shows how those risks can increase the need for shelter, assistance, and other supports emphasized in the Parolin study. The line communicates the relationship rather than either study by itself.
 
 ::hs2_poem_rel2 [display=target:hs2_main label="Poem: relationship 3"]
 
@@ -897,7 +897,7 @@ Lianne: You chose the following option.
 
 hs2_line2_choice_why.readonly <- true
 
-Lacy: I like this one. This line connects the environmental pressures represented by storms and instability to the emotional and psychological strain discussed in the Barry study. It suggests that difficult conditions can affect not only physical surroundings but also people's well-being over time.
+Lacy: I like “Long seasons of wind and uncertainty wear more than wood and steel.” This line connects the environmental pressures represented by storms and instability to the emotional and psychological strain discussed in the Barry study. It suggests that difficult conditions can affect not only physical surroundings but also people's well-being over time.
 
 ::hs2_poem_rel3 [display=target:hs2_main label="Poem: relationship 4"]
 
@@ -929,7 +929,7 @@ Lianne: You chose the following option.
 
 hs2_line3_choice_why.readonly <- true
 
-Ty: I am going with this one. This line connects the Barry et al. study emphasis on mental health and substance-use challenges with the Parolin's emphasis on support systems. It suggests that assistance programs may help stabilize people when personal challenges make housing insecurity more likely.
+Ty: I am going with “When strength begins to falter, support can steady what remains.” This line connects the Barry et al. study emphasis on mental health and substance-use challenges with the Parolin's emphasis on support systems. It suggests that assistance programs may help stabilize people when personal challenges make housing insecurity more likely.
 
 ::hs2_poem_rel4 [display=target:hs2_main label="Poem: relationship 5"]
 
@@ -959,7 +959,7 @@ Lianne: You chose the following option.
 
 hs2_line4_choice_why.readonly <- true
 
-Lacy: **I like this one the best.** It reflects the Doran et al. insight that housing insecurity often develops through the accumulation of multiple challenges over time. Rather than pointing to one cause, it emphasizes how economic, social, environmental, and personal pressures can interact and gradually increase vulnerability.
+Lacy: **The line I like best is “No single wave breaks the vessel. / The damage gathers slowly, / storm by storm, / season by season.”** It reflects the Doran et al. insight that housing insecurity often develops through the accumulation of multiple challenges over time. Rather than pointing to one cause, it emphasizes how economic, social, environmental, and personal pressures can interact and gradually increase vulnerability.
 
 ::hs2_poem [display=target:hs2_main label="Our poem"]
 
