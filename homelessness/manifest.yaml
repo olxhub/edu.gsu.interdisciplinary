@@ -33,3 +33,4 @@ routes:
   # when the parts are released into the course.
   /part1: homelessness/hs_sba_part1
   /part2: homelessness/hs_sba_part2
+  /mywork: homelessness/hs_my_work
