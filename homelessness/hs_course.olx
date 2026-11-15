@@ -28,6 +28,11 @@ license: AGPL
   <!-- Part 3 is not here yet. When it arrives (part3/), add it HIDDEN the
        same way, e.g. <Use ref="<Part 3's top block id>" when="false" />. -->
 
+  <!-- Everything the student has entered, both parts, on one printable
+       page (hs_my_work.olx). Always visible; the end of Part 2's
+       conversation brings the student here. -->
+  <Use ref="hs_my_work" />
+
   <!-- Same block the consent gate shows; same state. Here so a student can
        revisit and change their answer at any time (consent.olx). -->
   <Use ref="hs_irb_consent_form" />

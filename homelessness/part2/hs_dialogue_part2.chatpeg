@@ -1004,4 +1004,11 @@ Wrap-Up: End of Part 2 [id=hs2_wrapup]
 
 Lianne: Here is our finalized movie with the poem.
 
-  This concludes our work for Part 2.
+  This concludes our work for Part 2. Tap **Continue** to see everything you wrote on one page, where you can also save it as a PDF.
+
+--- pause ---
+
+// In the course, open My work (hs_my_work.olx). Outside the course (the
+// /part2 review route) there is no hs_course on the page and this only
+// records the selection.
+hs_course.selectedChild <- homelessness/hs_my_work

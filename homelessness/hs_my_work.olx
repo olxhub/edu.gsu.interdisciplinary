@@ -1,0 +1,842 @@
+<!--
+---
+description: "My work: everything the student has entered in the Homelessness SBA, Part 1 and Part 2, in course order under the conversation's section headings, on one printable page (Print or save as PDF). Part 2 appears once the student has started it."
+category: homelessness
+index: 96
+lang: en-Latn-US
+authors:
+  - Omer Ari
+  - Ben Pierce
+  - Lia Haddadian
+  - Piotr Mitros
+license: AGPL
+---
+-->
+
+<!--
+  My work: a read-back of the student's own answers, for review and for a PDF
+  (the Course renders only its selected child, so printing from here prints
+  just this page). The end of Part 2's conversation sends the student here
+  (hs_dialogue_part2.chatpeg, `hs_course.selectedChild <- ...`).
+
+  Each answer is a {{...}} state template, written to print what the student
+  entered and nothing else:
+    * isFilled(...) ? ... : "*Not answered yet.*"   An unanswered field shows
+      a quiet placeholder. (Unanswered readings are "", [] or, before the
+      block has loaded, undefined; isFilled is false for all three, and the
+      guard keeps toMarkdownBullets from ever seeing a non-list.)
+    * toMarkdownBullets([...])   Typed text goes through it, even a single
+      answer, because it Markdown-escapes: Markdown here also renders $...$
+      as math, so "$800 rent and $200 deposit" would otherwise print as a
+      formula, and a student's * or # would turn into emphasis or a heading.
+      Paragraphs (blank lines) are kept; a single line break joins the lines.
+    * Choice values ARE the option text in this course, so a choice prints
+      as itself; the student's own option ("own", or "other" for a written-in
+      research question) prints the text they wrote.
+    * TabularMCQ grids are shown as the grid itself (<Use ref=...>),
+      re-rendered with the student's answers (same state; still editable, as
+      everywhere else in the course). The exception is the eight-column
+      discipline grid (hs_disc_matrix), which is too wide for a printed
+      page and is read back as one list of checked disciplines per cause.
+-->
+
+<Vertical id="hs_my_work" title="My work">
+
+<Markdown id="hs_mw_intro"><![CDATA[
+## My work
+
+Everything you have entered in this activity so far, in the order you did it. To keep a copy, use the button below and choose **Save as PDF** as the printer.
+]]></Markdown>
+<ActionButton id="hs_mw_print" label="Print or save as PDF">
+  <PrintAction id="hs_mw_print_action" />
+</ActionButton>
+
+<!-- ===================== Part 1 ===================== -->
+
+<Markdown id="hs_mw_p1"><![CDATA[
+## Part 1: Causes of Homelessness
+
+### Task Set One: Brainstorm
+
+**A cause that focuses on an individual-level factor**
+
+{{isFilled(@hs_cause_indiv.value) ? toMarkdownBullets([@hs_cause_indiv.value]) : "*Not answered yet.*"}}
+
+**A structural cause**
+
+{{isFilled(@hs_cause_struct.value) ? toMarkdownBullets([@hs_cause_struct.value]) : "*Not answered yet.*"}}
+
+### Task Set Two: Review
+
+**Causes you highlighted in the focus group transcript**
+
+{{isFilled(@hs_fg_hl.selectedSegments) ? toMarkdownBullets(@hs_fg_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**The reasons you chose to research**
+
+{{isFilled(@hs_reasons.value) ? toMarkdownBullets(@hs_reasons.value.map(v => v === 'own_indiv' ? @hs_cause_indiv.value : (v === 'own_struct' ? @hs_cause_struct.value : v))) : "*Not answered yet.*"}}
+
+**Why you chose them**
+
+{{isFilled(@hs_reasons_why.value) ? toMarkdownBullets([@hs_reasons_why.value]) : "*Not answered yet.*"}}
+
+### Task Set Three: Reflect
+
+*Which disciplines are likely to give the most insight into each cause? The disciplines you checked:*
+
+**1. Trauma**
+
+{{isFilled(@hs_disc_matrix.value.cause1) ? toMarkdownBullets([0 in @hs_disc_matrix.value.cause1 ? "Biology" : "", 1 in @hs_disc_matrix.value.cause1 ? "Psychology" : "", 2 in @hs_disc_matrix.value.cause1 ? "Earth Science" : "", 3 in @hs_disc_matrix.value.cause1 ? "Sociology" : "", 4 in @hs_disc_matrix.value.cause1 ? "Economics" : "", 5 in @hs_disc_matrix.value.cause1 ? "Political Science" : "", 6 in @hs_disc_matrix.value.cause1 ? "Public Policy" : "", 7 in @hs_disc_matrix.value.cause1 ? "Social Work" : ""]) : "*Not answered yet.*"}}
+
+**2. Limited economic opportunity**
+
+{{isFilled(@hs_disc_matrix.value.cause2) ? toMarkdownBullets([0 in @hs_disc_matrix.value.cause2 ? "Biology" : "", 1 in @hs_disc_matrix.value.cause2 ? "Psychology" : "", 2 in @hs_disc_matrix.value.cause2 ? "Earth Science" : "", 3 in @hs_disc_matrix.value.cause2 ? "Sociology" : "", 4 in @hs_disc_matrix.value.cause2 ? "Economics" : "", 5 in @hs_disc_matrix.value.cause2 ? "Political Science" : "", 6 in @hs_disc_matrix.value.cause2 ? "Public Policy" : "", 7 in @hs_disc_matrix.value.cause2 ? "Social Work" : ""]) : "*Not answered yet.*"}}
+
+**3. Racial discrimination in housing and lending**
+
+{{isFilled(@hs_disc_matrix.value.cause3) ? toMarkdownBullets([0 in @hs_disc_matrix.value.cause3 ? "Biology" : "", 1 in @hs_disc_matrix.value.cause3 ? "Psychology" : "", 2 in @hs_disc_matrix.value.cause3 ? "Earth Science" : "", 3 in @hs_disc_matrix.value.cause3 ? "Sociology" : "", 4 in @hs_disc_matrix.value.cause3 ? "Economics" : "", 5 in @hs_disc_matrix.value.cause3 ? "Political Science" : "", 6 in @hs_disc_matrix.value.cause3 ? "Public Policy" : "", 7 in @hs_disc_matrix.value.cause3 ? "Social Work" : ""]) : "*Not answered yet.*"}}
+
+**4. Limited cash assistance or income support**
+
+{{isFilled(@hs_disc_matrix.value.cause4) ? toMarkdownBullets([0 in @hs_disc_matrix.value.cause4 ? "Biology" : "", 1 in @hs_disc_matrix.value.cause4 ? "Psychology" : "", 2 in @hs_disc_matrix.value.cause4 ? "Earth Science" : "", 3 in @hs_disc_matrix.value.cause4 ? "Sociology" : "", 4 in @hs_disc_matrix.value.cause4 ? "Economics" : "", 5 in @hs_disc_matrix.value.cause4 ? "Political Science" : "", 6 in @hs_disc_matrix.value.cause4 ? "Public Policy" : "", 7 in @hs_disc_matrix.value.cause4 ? "Social Work" : ""]) : "*Not answered yet.*"}}
+
+**5. Extreme heat or severe weather**
+
+{{isFilled(@hs_disc_matrix.value.cause5) ? toMarkdownBullets([0 in @hs_disc_matrix.value.cause5 ? "Biology" : "", 1 in @hs_disc_matrix.value.cause5 ? "Psychology" : "", 2 in @hs_disc_matrix.value.cause5 ? "Earth Science" : "", 3 in @hs_disc_matrix.value.cause5 ? "Sociology" : "", 4 in @hs_disc_matrix.value.cause5 ? "Economics" : "", 5 in @hs_disc_matrix.value.cause5 ? "Political Science" : "", 6 in @hs_disc_matrix.value.cause5 ? "Public Policy" : "", 7 in @hs_disc_matrix.value.cause5 ? "Social Work" : ""]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_ts4"><![CDATA[
+### Task Set Four: Review the Literature
+]]></Markdown>
+
+<Markdown id="hs_mw_econ"><![CDATA[
+### Source 1: Cebula and Saunoris (2021)
+
+**Which sections should we examine most closely?**
+
+{{isFilled(@hs_econ_sections.value) ? toMarkdownBullets(@hs_econ_sections.value) : "*Not answered yet.*"}}
+
+**Why you chose these sections**
+
+{{isFilled(@hs_econ_sections_why.value) ? toMarkdownBullets([@hs_econ_sections_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_econ_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_econ_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_econ_ins_hl_why.value) ? toMarkdownBullets([@hs_econ_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_econ_ins_write.value) ? toMarkdownBullets([@hs_econ_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_econ_ins_choice.value) ? toMarkdownBullets([@hs_econ_ins_choice.value === 'own' ? @hs_econ_ins_write.value : @hs_econ_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_econ_ins_choice_why.value) ? toMarkdownBullets([@hs_econ_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_econ_q_choice.value) ? toMarkdownBullets([@hs_econ_q_choice.value === 'other' ? @hs_econ_q_choice_other.value : @hs_econ_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_econ_q_why.value) ? toMarkdownBullets([@hs_econ_q_why.value]) : "*Not answered yet.*"}}
+
+**Evidence and methods you highlighted**
+
+{{isFilled(@hs_econ_em_hl.selectedSegments) ? toMarkdownBullets(@hs_econ_em_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these words**
+
+{{isFilled(@hs_econ_em_why.value) ? toMarkdownBullets([@hs_econ_em_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_econ_crit_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Higher levels of entrepreneurial activity and labor market freedom may reduce homelessness by expanding economic opportunity and reducing barriers to employment.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_econ_crit" />
+<Markdown id="hs_mw_econ_crit_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_econ_crit_why.value) ? toMarkdownBullets([@hs_econ_crit_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_econ_end"><![CDATA[
+**The statement you chose for the underlying assumption of Economics**
+
+{{isFilled(@hs_econ_assume.value) ? toMarkdownBullets([@hs_econ_assume.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_econ_assume_why.value) ? toMarkdownBullets([@hs_econ_assume_why.value]) : "*Not answered yet.*"}}
+
+#### Brain Break
+
+**1. What does the Economics discipline seem to assume about why people experience housing insecurity?**
+
+{{isFilled(@hs_econ_bb1.value) ? toMarkdownBullets([@hs_econ_bb1.value]) : "*Not answered yet.*"}}
+
+**2. If another discipline studied this same problem, what might it focus on instead?**
+
+{{isFilled(@hs_econ_bb2.value) ? toMarkdownBullets([@hs_econ_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What, if anything, is still unclear or confusing?**
+
+{{isFilled(@hs_econ_bb3.value) ? toMarkdownBullets([@hs_econ_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_policy"><![CDATA[
+### Source 2: Parolin (2021)
+
+**Which discipline is most representative of this study?**
+
+{{isFilled(@hs_policy_disc.value) ? toMarkdownBullets([@hs_policy_disc.value]) : "*Not answered yet.*"}}
+
+**Clues you highlighted**
+
+{{isFilled(@hs_policy_kw.selectedSegments) ? toMarkdownBullets(@hs_policy_kw.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**How these clues represent the discipline**
+
+{{isFilled(@hs_policy_kw_why.value) ? toMarkdownBullets([@hs_policy_kw_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_policy_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_policy_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_policy_ins_hl_why.value) ? toMarkdownBullets([@hs_policy_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_policy_ins_write.value) ? toMarkdownBullets([@hs_policy_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_policy_ins_choice.value) ? toMarkdownBullets([@hs_policy_ins_choice.value === 'own' ? @hs_policy_ins_write.value : @hs_policy_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_policy_ins_choice_why.value) ? toMarkdownBullets([@hs_policy_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_policy_q_choice.value) ? toMarkdownBullets([@hs_policy_q_choice.value === 'other' ? @hs_policy_q_choice_other.value : @hs_policy_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_policy_q_why.value) ? toMarkdownBullets([@hs_policy_q_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_policy_crit1_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Access to government cash assistance can improve housing stability for low-income families.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_policy_crit1" />
+<Markdown id="hs_mw_policy_crit1_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_policy_crit1_why.value) ? toMarkdownBullets([@hs_policy_crit1_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_policy_crit2_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Government policies and institutions shape social conditions and people’s opportunities.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_policy_crit2" />
+<Markdown id="hs_mw_policy_crit2_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_policy_crit2_why.value) ? toMarkdownBullets([@hs_policy_crit2_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_policy_end"><![CDATA[
+#### Brain Break
+
+**1. Look at the Disciplinary Perspective Comparison table. Which two rows best illustrate the differences between the economics and public policy perspectives? Why?**
+
+{{isFilled(@hs_policy_bb1.value) ? toMarkdownBullets([@hs_policy_bb1.value]) : "*Not answered yet.*"}}
+
+**2. How do you think these two studies might complement each other?**
+
+{{isFilled(@hs_policy_bb2.value) ? toMarkdownBullets([@hs_policy_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What, if anything, is still unclear or confusing?**
+
+{{isFilled(@hs_policy_bb3.value) ? toMarkdownBullets([@hs_policy_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_psych"><![CDATA[
+### Source 3: Barry et al. (2024)
+
+**Which discipline is most representative of this study?**
+
+{{isFilled(@hs_psych_disc.value) ? toMarkdownBullets([@hs_psych_disc.value]) : "*Not answered yet.*"}}
+
+**Clues you highlighted**
+
+{{isFilled(@hs_psych_kw.selectedSegments) ? toMarkdownBullets(@hs_psych_kw.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**How these clues represent the discipline**
+
+{{isFilled(@hs_psych_kw_why.value) ? toMarkdownBullets([@hs_psych_kw_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_psych_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_psych_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_psych_ins_hl_why.value) ? toMarkdownBullets([@hs_psych_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_psych_ins_write.value) ? toMarkdownBullets([@hs_psych_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_psych_ins_choice.value) ? toMarkdownBullets([@hs_psych_ins_choice.value === 'own' ? @hs_psych_ins_write.value : @hs_psych_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_psych_ins_choice_why.value) ? toMarkdownBullets([@hs_psych_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_psych_q_choice.value) ? toMarkdownBullets([@hs_psych_q_choice.value === 'other' ? @hs_psych_q_choice_other.value : @hs_psych_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_psych_q_why.value) ? toMarkdownBullets([@hs_psych_q_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_psych_crit_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Human thoughts, emotions, behaviors, and mental processes influence people's experiences and life outcomes.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_psych_crit" />
+<Markdown id="hs_mw_psych_crit_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_psych_crit_why.value) ? toMarkdownBullets([@hs_psych_crit_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_psych_end"><![CDATA[
+#### Brain Break
+
+**1. Look at the Disciplinary Perspective Comparison table. Which two rows best illustrate the differences among the economics, public policy, and psychology perspectives? Why?**
+
+{{isFilled(@hs_psych_bb1.value) ? toMarkdownBullets([@hs_psych_bb1.value]) : "*Not answered yet.*"}}
+
+**2. How does the psychology perspective complement the economics and public policy perspectives? What does it add to our understanding of housing insecurity?**
+
+{{isFilled(@hs_psych_bb2.value) ? toMarkdownBullets([@hs_psych_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What, if anything, is still unclear or confusing?**
+
+{{isFilled(@hs_psych_bb3.value) ? toMarkdownBullets([@hs_psych_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_estate"><![CDATA[
+### Source 4: Contat et al. (2024)
+
+**Which discipline is most representative of this study?**
+
+{{isFilled(@hs_estate_disc.value) ? toMarkdownBullets([@hs_estate_disc.value]) : "*Not answered yet.*"}}
+
+**Clues you highlighted**
+
+{{isFilled(@hs_estate_kw.selectedSegments) ? toMarkdownBullets(@hs_estate_kw.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**How these clues represent the discipline**
+
+{{isFilled(@hs_estate_kw_why.value) ? toMarkdownBullets([@hs_estate_kw_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_estate_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_estate_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_estate_ins_hl_why.value) ? toMarkdownBullets([@hs_estate_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_estate_ins_write.value) ? toMarkdownBullets([@hs_estate_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_estate_ins_choice.value) ? toMarkdownBullets([@hs_estate_ins_choice.value === 'own' ? @hs_estate_ins_write.value : @hs_estate_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_estate_ins_choice_why.value) ? toMarkdownBullets([@hs_estate_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_estate_q_choice.value) ? toMarkdownBullets([@hs_estate_q_choice.value === 'other' ? @hs_estate_q_choice_other.value : @hs_estate_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_estate_q_why.value) ? toMarkdownBullets([@hs_estate_q_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_estate_crit_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Housing systems are shaped by interactions among market forces, the built environment, and the natural environment.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_estate_crit" />
+<Markdown id="hs_mw_estate_crit_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_estate_crit_why.value) ? toMarkdownBullets([@hs_estate_crit_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_estate_end"><![CDATA[
+#### Brain Break
+
+**1. Which row in the Disciplinary Perspective Comparison table best shows how Real Estate Economics differs from the other disciplines? Why?**
+
+{{isFilled(@hs_estate_bb1.value) ? toMarkdownBullets([@hs_estate_bb1.value]) : "*Not answered yet.*"}}
+
+**2. Looking across all four disciplines, what relationships or connections are beginning to emerge?**
+
+{{isFilled(@hs_estate_bb2.value) ? toMarkdownBullets([@hs_estate_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What, if anything, is still unclear or confusing?**
+
+{{isFilled(@hs_estate_bb3.value) ? toMarkdownBullets([@hs_estate_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_polisci"><![CDATA[
+### Source 5: Fowle (2022)
+
+**Which discipline is most representative of this study?**
+
+{{isFilled(@hs_polisci_disc.value) ? toMarkdownBullets([@hs_polisci_disc.value]) : "*Not answered yet.*"}}
+
+**Clues you highlighted**
+
+{{isFilled(@hs_polisci_kw.selectedSegments) ? toMarkdownBullets(@hs_polisci_kw.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**How these clues represent the discipline**
+
+{{isFilled(@hs_polisci_kw_why.value) ? toMarkdownBullets([@hs_polisci_kw_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_polisci_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_polisci_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_polisci_ins_hl_why.value) ? toMarkdownBullets([@hs_polisci_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_polisci_ins_write.value) ? toMarkdownBullets([@hs_polisci_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_polisci_ins_choice.value) ? toMarkdownBullets([@hs_polisci_ins_choice.value === 'own' ? @hs_polisci_ins_write.value : @hs_polisci_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_polisci_ins_choice_why.value) ? toMarkdownBullets([@hs_polisci_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_polisci_q_choice.value) ? toMarkdownBullets([@hs_polisci_q_choice.value === 'other' ? @hs_polisci_q_choice_other.value : @hs_polisci_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_polisci_q_why.value) ? toMarkdownBullets([@hs_polisci_q_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_polisci_crit_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *Social outcomes are shaped by systems of power, institutions, and historical inequalities.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_polisci_crit" />
+<Markdown id="hs_mw_polisci_crit_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_polisci_crit_why.value) ? toMarkdownBullets([@hs_polisci_crit_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_polisci_end"><![CDATA[
+#### Brain Break
+
+**1. Which row in the Disciplinary Perspective Comparison table best highlights how the Political Science perspective differs from the other four disciplines? Why?**
+
+{{isFilled(@hs_polisci_bb1.value) ? toMarkdownBullets([@hs_polisci_bb1.value]) : "*Not answered yet.*"}}
+
+**2. Looking across the five disciplinary perspectives, which two do you think complement each other the most? Explain why.**
+
+{{isFilled(@hs_polisci_bb2.value) ? toMarkdownBullets([@hs_polisci_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What, if anything, is still unclear or confusing?**
+
+{{isFilled(@hs_polisci_bb3.value) ? toMarkdownBullets([@hs_polisci_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<Markdown id="hs_mw_soc"><![CDATA[
+### Source 6: Doran et al. (2019)
+
+**Which discipline is most representative of this study?**
+
+{{isFilled(@hs_soc_disc.value) ? toMarkdownBullets([@hs_soc_disc.value]) : "*Not answered yet.*"}}
+
+**Clues you highlighted**
+
+{{isFilled(@hs_soc_kw.selectedSegments) ? toMarkdownBullets(@hs_soc_kw.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**How these clues represent the discipline**
+
+{{isFilled(@hs_soc_kw_why.value) ? toMarkdownBullets([@hs_soc_kw_why.value]) : "*Not answered yet.*"}}
+
+**What you highlighted as the main insight**
+
+{{isFilled(@hs_soc_ins_hl.selectedSegments) ? toMarkdownBullets(@hs_soc_ins_hl.selectedSegments) : "*Nothing highlighted yet.*"}}
+
+**Why you highlighted these sentences**
+
+{{isFilled(@hs_soc_ins_hl_why.value) ? toMarkdownBullets([@hs_soc_ins_hl_why.value]) : "*Not answered yet.*"}}
+
+**Your sentence for the main insight**
+
+{{isFilled(@hs_soc_ins_write.value) ? toMarkdownBullets([@hs_soc_ins_write.value]) : "*Not answered yet.*"}}
+
+**The insight statement you chose**
+
+{{isFilled(@hs_soc_ins_choice.value) ? toMarkdownBullets([@hs_soc_ins_choice.value === 'own' ? @hs_soc_ins_write.value : @hs_soc_ins_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_soc_ins_choice_why.value) ? toMarkdownBullets([@hs_soc_ins_choice_why.value]) : "*Not answered yet.*"}}
+
+**The research question you chose**
+
+{{isFilled(@hs_soc_q_choice.value) ? toMarkdownBullets([@hs_soc_q_choice.value === 'other' ? @hs_soc_q_choice_other.value : @hs_soc_q_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs_soc_q_why.value) ? toMarkdownBullets([@hs_soc_q_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_soc_crit_label"><![CDATA[
+**Is this statement broad enough to be an underlying assumption of the discipline?** *People's lives and experiences are shaped by their relationships with others and the social structures in which they live.*
+
+Your answers:
+]]></Markdown>
+<Use ref="hs_soc_crit" />
+<Markdown id="hs_mw_soc_crit_why"><![CDATA[
+**How you explained your answers**
+
+{{isFilled(@hs_soc_crit_why.value) ? toMarkdownBullets([@hs_soc_crit_why.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+<Markdown id="hs_mw_soc_end"><![CDATA[
+#### Brain Break
+
+**1. Looking across all six disciplinary perspectives, which two seem most closely connected? Which two seem the most different? Explain your thinking.**
+
+{{isFilled(@hs_soc_bb1.value) ? toMarkdownBullets([@hs_soc_bb1.value]) : "*Not answered yet.*"}}
+
+**2. If you had to explain homelessness using only one disciplinary perspective, what important parts of the problem would be missing?**
+
+{{isFilled(@hs_soc_bb2.value) ? toMarkdownBullets([@hs_soc_bb2.value]) : "*Not answered yet.*"}}
+
+**3. What questions or ideas are you still thinking about as we prepare to bring these disciplinary perspectives together?**
+
+{{isFilled(@hs_soc_bb3.value) ? toMarkdownBullets([@hs_soc_bb3.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+<!-- ===================== Part 2 =====================
+     Shown once the student has started Part 2 (its first screen asks for
+     all six recall cells), so a printout made before then is not padded
+     with placeholders for a part not yet released or begun. -->
+
+<Markdown id="hs_mw_p2_not_started" when="countFilled([@hs2_recall1.value, @hs2_recall2.value, @hs2_recall3.value, @hs2_recall4.value, @hs2_recall5.value, @hs2_recall6.value]) === 0"><![CDATA[
+## Part 2: Integrating Disciplinary Insights
+
+*Your Part 2 work will appear here once you start it.*
+]]></Markdown>
+
+<Vertical id="hs_mw_p2" when="countFilled([@hs2_recall1.value, @hs2_recall2.value, @hs2_recall3.value, @hs2_recall4.value, @hs2_recall5.value, @hs2_recall6.value]) &gt; 0">
+
+<Markdown id="hs_mw_p2_start"><![CDATA[
+## Part 2: Integrating Disciplinary Insights
+
+### Reviewing Our Sources
+
+*The comparison-table cells you filled in from memory:*
+
+**[ 1 ] Economics (Cebula & Saunoris, 2021): Phenomena studied**
+
+{{isFilled(@hs2_recall1.value) ? toMarkdownBullets([@hs2_recall1.value]) : "*Not answered yet.*"}}
+
+**[ 2 ] Political Science (Fowle, 2022): Questions asked**
+
+{{isFilled(@hs2_recall2.value) ? toMarkdownBullets([@hs2_recall2.value]) : "*Not answered yet.*"}}
+
+**[ 3 ] Psychology / Psychiatry (Barry et al., 2024): Methods**
+
+{{isFilled(@hs2_recall3.value) ? toMarkdownBullets([@hs2_recall3.value]) : "*Not answered yet.*"}}
+
+**[ 4 ] Real Estate Economics (Contat et al., 2024): Underlying Assumptions**
+
+{{isFilled(@hs2_recall4.value) ? toMarkdownBullets([@hs2_recall4.value]) : "*Not answered yet.*"}}
+
+**[ 5 ] Public Policy (Parolin, 2021): Main insight**
+
+{{isFilled(@hs2_recall5.value) ? toMarkdownBullets([@hs2_recall5.value]) : "*Not answered yet.*"}}
+
+**[ 6 ] Sociology (Doran et al., 2019): Main insight**
+
+{{isFilled(@hs2_recall6.value) ? toMarkdownBullets([@hs2_recall6.value]) : "*Not answered yet.*"}}
+
+### Integrating Disciplinary Insights
+
+**Which metaphor best represents rich interdisciplinarity?**
+
+{{isFilled(@hs2_metaphor.value) ? toMarkdownBullets([@hs2_metaphor.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_metaphor_why.value) ? toMarkdownBullets([@hs2_metaphor_why.value]) : "*Not answered yet.*"}}
+
+### Conceptual Mapping
+
+**Which discipline informs each box of the crime concept map? Your answers:**
+]]></Markdown>
+<Use ref="hs2_crime_disc" />
+<Markdown id="hs_mw_p2_rest"><![CDATA[
+**Why you chose these disciplines**
+
+{{isFilled(@hs2_crime_disc_why.value) ? toMarkdownBullets([@hs2_crime_disc_why.value]) : "*Not answered yet.*"}}
+
+**Which statement best explains the reciprocal relationship?**
+
+{{isFilled(@hs2_reciprocal.value) ? toMarkdownBullets([@hs2_reciprocal.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_reciprocal_why.value) ? toMarkdownBullets([@hs2_reciprocal_why.value]) : "*Not answered yet.*"}}
+
+### Mapping Housing Insecurity
+
+**The arrow connecting Fowle (2022) and Parolin (2021)**
+
+{{isFilled(@hs2_arrow_fowle_parolin.value) ? toMarkdownBullets([@hs2_arrow_fowle_parolin.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_fowle_parolin_why.value) ? toMarkdownBullets([@hs2_arrow_fowle_parolin_why.value]) : "*Not answered yet.*"}}
+
+**The arrow connecting Cebula and Saunoris (2021) and Fowle (2022)**
+
+{{isFilled(@hs2_arrow_cebula_fowle.value) ? toMarkdownBullets([@hs2_arrow_cebula_fowle.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_cebula_fowle_why.value) ? toMarkdownBullets([@hs2_arrow_cebula_fowle_why.value]) : "*Not answered yet.*"}}
+
+**The arrow connecting Contat et al. (2024) and Parolin (2021)**
+
+{{isFilled(@hs2_arrow_contat_parolin.value) ? toMarkdownBullets([@hs2_arrow_contat_parolin.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_contat_parolin_why.value) ? toMarkdownBullets([@hs2_arrow_contat_parolin_why.value]) : "*Not answered yet.*"}}
+
+**The arrow connecting Contat et al. (2024) and Fowle (2022)**
+
+{{isFilled(@hs2_arrow_contat_fowle.value) ? toMarkdownBullets([@hs2_arrow_contat_fowle.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_contat_fowle_why.value) ? toMarkdownBullets([@hs2_arrow_contat_fowle_why.value]) : "*Not answered yet.*"}}
+
+**The arrow connecting Contat et al. (2024) and Barry et al. (2024)**
+
+{{isFilled(@hs2_arrow_contat_barry.value) ? toMarkdownBullets([@hs2_arrow_contat_barry.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_contat_barry_why.value) ? toMarkdownBullets([@hs2_arrow_contat_barry_why.value]) : "*Not answered yet.*"}}
+
+**The arrow connecting Barry et al. (2024) and Parolin (2021)**
+
+{{isFilled(@hs2_arrow_barry_parolin.value) ? toMarkdownBullets([@hs2_arrow_barry_parolin.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_arrow_barry_parolin_why.value) ? toMarkdownBullets([@hs2_arrow_barry_parolin_why.value]) : "*Not answered yet.*"}}
+
+**The direction of the relationship between the Barry et al. and Parolin insights**
+
+{{isFilled(@hs2_direction.value) ? toMarkdownBullets([@hs2_direction.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_direction_why.value) ? toMarkdownBullets([@hs2_direction_why.value]) : "*Not answered yet.*"}}
+
+#### Brain Break
+
+**1. What did the concept map help you see about housing insecurity that was harder to see when the studies were considered separately?**
+
+{{isFilled(@hs2_bb11.value) ? toMarkdownBullets([@hs2_bb11.value]) : "*Not answered yet.*"}}
+
+**2. Which connection on the map did you find most convincing? What made that connection convincing?**
+
+{{isFilled(@hs2_bb12.value) ? toMarkdownBullets([@hs2_bb12.value]) : "*Not answered yet.*"}}
+
+**3. What is one connection on the map that you think needs more evidence or research? Why?**
+
+{{isFilled(@hs2_bb13.value) ? toMarkdownBullets([@hs2_bb13.value]) : "*Not answered yet.*"}}
+
+### The Exhibit Film
+
+**What other elements you saw in the draft film**
+
+{{isFilled(@hs2_film_obs.value) ? toMarkdownBullets([@hs2_film_obs.value]) : "*Not answered yet.*"}}
+
+**The overall idea the film seems to communicate**
+
+{{isFilled(@hs2_film_idea.value) ? toMarkdownBullets([@hs2_film_idea.value]) : "*Not answered yet.*"}}
+
+**Your reasoning**
+
+{{isFilled(@hs2_film_idea_why.value) ? toMarkdownBullets([@hs2_film_idea_why.value]) : "*Not answered yet.*"}}
+
+**Insights that may help explain the film element: *isolated ship exposed to violent storms and crashing waves near the shoreline***
+
+{{isFilled(@hs2_elem1.value) ? toMarkdownBullets(@hs2_elem1.value) : "*Not answered yet.*"}}
+
+**Why you chose them**
+
+{{isFilled(@hs2_elem1_why.value) ? toMarkdownBullets([@hs2_elem1_why.value]) : "*Not answered yet.*"}}
+
+**Insights that may help explain the film element: *weakening ropes and strained anchors along with rust buildup and erosion of the ship’s structure***
+
+{{isFilled(@hs2_elem2.value) ? toMarkdownBullets(@hs2_elem2.value) : "*Not answered yet.*"}}
+
+**Why you chose them**
+
+{{isFilled(@hs2_elem2_why.value) ? toMarkdownBullets([@hs2_elem2_why.value]) : "*Not answered yet.*"}}
+
+**Insights that may help explain the film element: *rising water entering the ship and darkening interior spaces within the ship***
+
+{{isFilled(@hs2_elem3.value) ? toMarkdownBullets(@hs2_elem3.value) : "*Not answered yet.*"}}
+
+**Why you chose them**
+
+{{isFilled(@hs2_elem3_why.value) ? toMarkdownBullets([@hs2_elem3_why.value]) : "*Not answered yet.*"}}
+
+### Representing Structural Inequality
+
+**The most accurate insight statement for the Fowle (2022) study**
+
+{{isFilled(@hs2_fowle_recall.value) ? toMarkdownBullets([@hs2_fowle_recall.value]) : "*Not answered yet.*"}}
+
+**How else the movie might represent structural racial inequality in housing systems**
+
+{{isFilled(@hs2_harbor_idea.value) ? toMarkdownBullets([@hs2_harbor_idea.value]) : "*Not answered yet.*"}}
+
+**The symbolic possibility you chose**
+
+{{isFilled(@hs2_harbor.value) ? toMarkdownBullets([@hs2_harbor.value === 'own' ? @hs2_harbor_idea.value : @hs2_harbor.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_harbor_why.value) ? toMarkdownBullets([@hs2_harbor_why.value]) : "*Not answered yet.*"}}
+
+#### Brain Break
+
+**1. What did building the ship metaphor help you see or understand about housing insecurity?**
+
+{{isFilled(@hs2_bb21.value) ? toMarkdownBullets([@hs2_bb21.value]) : "*Not answered yet.*"}}
+
+**2. Which part of the metaphor stands out most to you?**
+
+{{isFilled(@hs2_bb22.value) ? toMarkdownBullets([@hs2_bb22.value]) : "*Not answered yet.*"}}
+
+**3. How are you feeling about integration at this point?**
+
+{{isFilled(@hs2_bb23.value) ? toMarkdownBullets([@hs2_bb23.value]) : "*Not answered yet.*"}}
+
+### Writing a Poem
+
+**Relationship 2: the line you wrote**
+
+{{isFilled(@hs2_line1_write.value) ? toMarkdownBullets([@hs2_line1_write.value]) : "*Not answered yet.*"}}
+
+**Relationship 2: the line you chose**
+
+{{isFilled(@hs2_line1_choice.value) ? toMarkdownBullets([@hs2_line1_choice.value === 'own' ? @hs2_line1_write.value : @hs2_line1_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_line1_choice_why.value) ? toMarkdownBullets([@hs2_line1_choice_why.value]) : "*Not answered yet.*"}}
+
+**Relationship 3: the line you wrote**
+
+{{isFilled(@hs2_line2_write.value) ? toMarkdownBullets([@hs2_line2_write.value]) : "*Not answered yet.*"}}
+
+**Relationship 3: the line you chose**
+
+{{isFilled(@hs2_line2_choice.value) ? toMarkdownBullets([@hs2_line2_choice.value === 'own' ? @hs2_line2_write.value : @hs2_line2_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_line2_choice_why.value) ? toMarkdownBullets([@hs2_line2_choice_why.value]) : "*Not answered yet.*"}}
+
+**Relationship 4: the line you wrote**
+
+{{isFilled(@hs2_line3_write.value) ? toMarkdownBullets([@hs2_line3_write.value]) : "*Not answered yet.*"}}
+
+**Relationship 4: the line you chose**
+
+{{isFilled(@hs2_line3_choice.value) ? toMarkdownBullets([@hs2_line3_choice.value === 'own' ? @hs2_line3_write.value : @hs2_line3_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_line3_choice_why.value) ? toMarkdownBullets([@hs2_line3_choice_why.value]) : "*Not answered yet.*"}}
+
+**Relationship 5: the line you wrote**
+
+{{isFilled(@hs2_line4_write.value) ? toMarkdownBullets([@hs2_line4_write.value]) : "*Not answered yet.*"}}
+
+**Relationship 5: the line you chose**
+
+{{isFilled(@hs2_line4_choice.value) ? toMarkdownBullets([@hs2_line4_choice.value === 'own' ? @hs2_line4_write.value : @hs2_line4_choice.value]) : "*Not answered yet.*"}}
+
+**Why you chose it**
+
+{{isFilled(@hs2_line4_choice_why.value) ? toMarkdownBullets([@hs2_line4_choice_why.value]) : "*Not answered yet.*"}}
+
+### Your poem: *At the Shore*
+
+*The opening lines, then the line you chose for each relationship.*
+
+{{toMarkdownBullets(["Some ships rest behind stronger walls, where help arrives before the storm.", (isFilled(@hs2_line1_choice.value) ? (@hs2_line1_choice.value === 'own' ? @hs2_line1_write.value : @hs2_line1_choice.value) : "(not chosen yet)"), (isFilled(@hs2_line2_choice.value) ? (@hs2_line2_choice.value === 'own' ? @hs2_line2_write.value : @hs2_line2_choice.value) : "(not chosen yet)"), (isFilled(@hs2_line3_choice.value) ? (@hs2_line3_choice.value === 'own' ? @hs2_line3_write.value : @hs2_line3_choice.value) : "(not chosen yet)"), (isFilled(@hs2_line4_choice.value) ? (@hs2_line4_choice.value === 'own' ? @hs2_line4_write.value : @hs2_line4_choice.value) : "(not chosen yet)")])}}
+
+#### Brain Break
+
+**1. Which integration activity helped you understand housing insecurity best—the concept map, the film metaphor, or the poem? Why?**
+
+{{isFilled(@hs2_bb31.value) ? toMarkdownBullets([@hs2_bb31.value]) : "*Not answered yet.*"}}
+
+**2. What is one thing you understand about housing insecurity now that you did not see as clearly when we looked at the disciplinary studies separately?**
+
+{{isFilled(@hs2_bb32.value) ? toMarkdownBullets([@hs2_bb32.value]) : "*Not answered yet.*"}}
+
+**3. How are you feeling about integrating disciplinary insights at this point?**
+
+{{isFilled(@hs2_bb33.value) ? toMarkdownBullets([@hs2_bb33.value]) : "*Not answered yet.*"}}
+]]></Markdown>
+
+</Vertical>
+
+</Vertical>
