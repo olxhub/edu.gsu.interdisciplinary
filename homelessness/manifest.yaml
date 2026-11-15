@@ -27,3 +27,9 @@ routes:
   # once the consent question is answered, either way. A deployment outside a
   # study points "/" at homelessness/hs_course instead.
   /: homelessness/hs_study
+  # Review entry points, not advertised to students: each part directly,
+  # outside the consent gate and the course navigation. The parts share
+  # state with the gated course, so a reviewer's work carries over. Remove
+  # when the parts are released into the course.
+  /part1: homelessness/hs_sba_part1
+  /part2: homelessness/hs_sba_part2
