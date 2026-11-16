@@ -19,21 +19,22 @@ license: AGPL
 <Course id="hs_course" title="Homelessness SBA" launchable="course">
   <Use ref="hs_sba_part1" />
 
-  <!-- Part 2 is HIDDEN until the course team releases it. Course honours
-       when= on its children and drops a child from the navigation while the
-       condition is false. To release Part 2, delete its when="false" and
-       redeploy the content. -->
-  <Use ref="hs_sba_part2" when="false" />
+  <!-- Part 2 appears once the student has finished Part 1: when Part 1's
+       chat (hs_chat, part1/hs_dialogue_part1.chatpeg) has reached its last
+       entry. A Chat's value is its position in the script, and 585 is the
+       index of the script's final line, the recap after "Wrap-Up: End of
+       Part 1"; the chat gets there only through every wait in Part 1. Course
+       re-evaluates when= live, so Part 2 joins the navigation the moment the
+       student reaches that line. If Part 1's script ever changes length,
+       recompute the index (the last entry of the parsed body). -->
+  <Use ref="hs_sba_part2" when="@hs_chat.value >= 585" />
 
   <!-- Part 3 is not here yet. When it arrives (part3/), add it HIDDEN the
        same way, e.g. <Use ref="<Part 3's top block id>" when="false" />. -->
 
   <!-- Everything the student has entered, both parts, on one printable
-       page (hs_my_work.olx). The end of Part 2's chat selects it.
-       Hidden until the instructor approves the page; while hidden, that
-       final Continue does nothing, so release My work no later than
-       Part 2 (delete the when="false"). -->
-  <Use ref="hs_my_work" when="false" />
+       page (hs_my_work.olx). The end of Part 2's chat selects it. -->
+  <Use ref="hs_my_work" />
 
   <!-- Same block the consent gate shows; same state. Here so a student can
        revisit and change their answer at any time (consent.olx). -->
